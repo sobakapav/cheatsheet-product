@@ -85,7 +85,7 @@ for (var cheatsheet of cheatsheets) {
           <ul>
             {section.items.map(item => (
               <li class="mb-2">
-                <a class="underline underline-offset-2 hover:text-[--aw-color-accent]" href={`/cheatsheets/${item.id}`}>
+                <a class="underline underline-offset-2 hover:text-[--aw-color-accent]" href={`/${item.id.substring(4)}`}>
                   {item.title}
                 </a>
               </li>

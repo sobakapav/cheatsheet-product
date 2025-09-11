@@ -10,7 +10,7 @@ import { getCanonical, getPermalink } from '~/utils/permalinks';
 export async function getStaticPaths() {
   const cheatsheets = await getCollection('cheatsheets');
   return cheatsheets.map(entry => ({
-    params: { slug: entry.id }, props: { entry },
+    params: { slug: entry.id.substring(4) }, props: { entry },
   }));
 }
 
