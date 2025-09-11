@@ -1,6 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 import typographyPlugin from '@tailwindcss/typography';
+import daisyui from 'daisyui';
 
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
@@ -18,24 +19,52 @@ export default {
         serif: ['var(--aw-font-serif, ui-serif)', ...defaultTheme.fontFamily.serif],
         heading: ['var(--aw-font-heading, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
       },
-
-      animation: {
-        fade: 'fadeInUp 1s both',
+      fontSize: {
+        xl: ['20px', '28px'],
+        '2xl': [
+          '24px',
+          {
+            lineHeight: '32px',
+          },
+        ],
+        '3xl': [
+          '30px',
+          {
+            lineHeight: '36px',
+          },
+        ],
+        '4xl': [
+          '36px',
+          {
+            lineHeight: '40px',
+          },
+        ],
       },
-
-      keyframes: {
-        fadeInUp: {
-          '0%': { opacity: 0, transform: 'translateY(2rem)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
+      gridTemplateColumns: {
+        header: '420px 1fr 40px',
+        footer: '70px 1fr 1fr 1fr',
+        features: '1fr 1fr 1fr',
+        portfolio: '1fr 1fr 1fr 1fr',
+        "portfolio-lg": '1fr 1fr 1fr',
+        "portfolio-md": '1fr 1fr',
+        portfoliofilter: '1fr 1fr 1.5fr',
+        portfoliofiltersm: '1fr',
+      },
+      gridTemplateRows: {
+        footer: 'auto auto',
+        'footer-sm': 'auto auto auto auto',
+        features: '1fr 1fr 1fr 1fr',
+      },
+      screens: {
+        safari: {
+          raw: '(min-resolution:.001dpcm)',
         },
       },
     },
   },
-  plugins: [
-    typographyPlugin,
-    plugin(({ addVariant }) => {
-      addVariant('intersect', '&:not([no-intersect])');
-    }),
-  ],
+  plugins: [typographyPlugin, daisyui],
   darkMode: 'class',
+  daisyui: {
+    prefix: 'daisy-',
+  },
 };

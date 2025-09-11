@@ -1,0 +1,60 @@
+---
+
+import { twMerge } from "tailwind-merge";
+
+import Image from '~/components/common/Image.astro';
+//import Button from '~/components/ui/Button.astro'; 
+import type { CallToAction } from '~/types';
+
+export interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  content?: string;
+  actions?: string | CallToAction[];
+}
+
+const {
+  id,
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  content = await Astro.slots.render('content'),
+  actions = await Astro.slots.render('actions'),
+  classes = {}
+} = Astro.props;
+---
+
+<section class="hero-block relative md:-mt-[76px]" {...id ? { id } : {}}>
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div class:list={[twMerge('pt-6 md:pt-8 pb-10 md:pb-12 px-4 sm:px-6', classes.main || '')]}>
+      <div class:list={[twMerge('text-left max-w-5xl', classes.container || '')]}>
+        {
+          tagline && (
+            <p
+              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase"
+              set:html={tagline}
+            />
+          )
+        }
+        {
+          title && (
+            <h1
+              class:list={[twMerge('max-w-3xl text-5xl md:text-8xl leading-tighter mb-4 font-heading dark:text-gray-200', classes.title || '')]}
+              set:html={title}
+            />
+          )
+        }
+        <div class:list={[twMerge('max-w-3xl', classes.subtitleContainer || '')]}>
+          {subtitle && (
+            <p class:list={[twMerge('text-xl text-muted mb-6 dark:text-slate-300', classes.subtitle || '')]} set:html={subtitle} />
+          )}         
+        </div>
+        {content && <Fragment set:html={content} />}
+      </div>
+    </div>
+  </div>
+</section>

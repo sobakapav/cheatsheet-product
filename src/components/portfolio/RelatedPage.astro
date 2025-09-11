@@ -1,0 +1,40 @@
+---
+
+import PortfolioListItem from '~/components/portfolio/ListItem.astro';
+import BlogListItem from '~/components/blog/ListItem.astro';
+import { getEntry } from 'astro:content';
+import { getPermalink } from '~/utils/permalinks';
+import { findPostsBySlugs } from '~/utils/blog';
+
+const { collection, page, excerpt, hideFields, styles } = Astro.props;
+
+var data;
+if (collection == 'post') {
+  data = JSON.parse(JSON.stringify((await findPostsBySlugs([page]))[0]));
+} else {
+  const entry = (await getEntry(collection, page));
+  if (entry) {
+    data = JSON.parse(JSON.stringify(entry.data)); 
+  } else {
+    console.log(`Cannot find entry ${page} for collection ${collection}`);
+    data = {};
+  }
+}
+
+if (excerpt) {
+  data.excerpt = excerpt;
+}
+data.href = ('research' == collection) ? data.link : `/${collection}/${page}`;
+
+---
+
+<Fragment>
+
+  {collection == 'portfolio' && (
+    <PortfolioListItem post={data} hideFields={hideFields} styles={styles} />
+  )}
+  
+  {collection == 'post' && (
+    <BlogListItem post={data} hideFields={hideFields} styles={styles} />
+  )}
+</Fragment>

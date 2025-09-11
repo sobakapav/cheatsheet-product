@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import merge from 'lodash.merge';
+
+import Layout from '~/layouts/PageLayout.astro';
+import SinglePost from '~/components/cheatsheets/SinglePost.astro';
+import Bread from '~/components/widgets/Bread.astro';
+import { getCanonical, getPermalink } from '~/utils/permalinks';
+
+export async function getStaticPaths() {
+  const cheatsheets = await getCollection('cheatsheets');
+  return cheatsheets.map(entry => ({
+    params: { slug: entry.id }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+
+const nextEntries = [];
+const cheatsheets = await getCollection('cheatsheets');
+
+const idx = cheatsheets.findIndex(e => (e.id === entry.id));
+if (idx >= 0) {
+  for (var i = 0; i < 3; i++) {
+    const n = cheatsheets[(idx + i + 1) % cheatsheets.length];  
+    nextEntries.push({ title: n.data.title, link: `/cheatsheets/${n.data.alias[0]}` });
+  }
+}
+
+const metadata = merge(
+  {
+    title: entry.data.metadata?.title,
+    description: entry.data.metadata?.description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      images: [{
+            url: '~/assets/images/cheatsheets.png',
+            width: 1200,
+            height: 630
+          }],
+      type: 'article',
+      ...entry.data.metadata?.openGraph,
+    },
+  },
+  { ...(entry?.metadata ? { ...entry.metadata, canonical: entry.metadata?.canonical || url } : {}) }
+) as MetaData;
+
+---
+
+<Layout metadata={metadata}>
+  <Bread
+    title={entry.data.title}
+  />
+    
+  <SinglePost post={{ ...entry.data }} next={nextEntries}/>
+</Layout>
