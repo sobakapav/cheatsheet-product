@@ -1,0 +1,88 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import Hund3 from '~/components/widgets/Hund3.astro';
+import RelatedPages from '~/components/portfolio/RelatedPages.astro';
+import { getCollection } from 'astro:content';
+
+import Bread from '~/components/widgets/Bread.astro';
+
+import { cheatsheetSectionNames } from '~/navigation';
+
+const metadata = {
+  title: 'Я хочу сделать хороший дизайн продукта • Ольга Павлова',
+  canonical: 'https://sbkpv.ru/book',
+  description: "В декабре в издательстве «ДМК Пресс» выйдет новая книга Ольги Павловой «Я хочу сделать хороший дизайн продукта». Для всех кто, задействован в дизайн-проектах, вне зависимости от роли в проекте и уровня навыков дизайнера.", 
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    site_name: 'Собака Павлова',
+    images: [{
+      url: '~/assets/images/book.jpg',
+      width: 717,
+      height: 1024
+    }],
+    type: 'website',
+  },
+};
+
+
+---
+
+<Layout metadata={metadata}>
+  <Bread title="Книга<br/>«Я хочу сделать хороший дизайн продукта»" />
+    
+  <Hund3
+    classes={{
+      main: 'pb-10 md:pb-10',
+      subtitle: 'mb-0',
+    }}
+  >
+    <Fragment slot="title">
+      Книга «Я хочу сделать хороший дизайн продукта»
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <div class="flex flex-row">
+        <div class="text-xl font-heading tracking-widest leading-none bg-[--aw-color-grey9] px-5 py-[10px] flex flex-row align-center max-h-11 mt-4 mb-4">
+          <a href="https://dmkpress.com/catalog/business/978-5-93700-435-2/">Оформить предзаказ</a>
+        </div>
+      </div>
+    
+      В декабре в издательстве «ДМК Пресс» выйдет новая книга Ольги Павловой «Я хочу сделать хороший дизайн продукта». Для всех кто, задействован в дизайн-проектах, вне зависимости от роли в проекте и уровня навыков дизайнера.
+      
+      
+      
+    </Fragment>
+  </Hund3>
+      
+  <div class="flex flex-col md:flex-row md:flex-wrap justify-between max-w-7xl mx-auto md:mx-auto px-6 sm:px-6 mb-6">
+      <article class="flex mb-6 relative gap-6 flex-nowrap flex-row">
+        <div>
+          <div class="relative overflow-hidden rounded image-animate">
+            <div class="w-72">
+              <img src="/images/book.jpg" alt="Я хочу сделать хороший дизайн продукта" crossorigin="anonymous" referrerpolicy="no-referrer" width="288" height="411" style="object-fit: cover; object-position: center;" class="rounded" loading="lazy" decoding="async" title="Я хочу сделать хороший дизайн продукта"> </div> </div> <div class="mb-1 mt-6"> <span class="text-sm"> <div class="inline-block"> 2025 год • 412 страниц • ДМК Пресс • ISBN: 978-5-93700-435-2 </div> </span> </div> </div>
+            <div class="">
+            <header>
+            <div class="flex flex-row justify-between"> <h2 class="text-xl font-heading tracking-widest leading-none dark:text-[--aw-color-pink] text-[--aw-color-hund] mb-4"><span> Ольга Павлова </span></h2>
+            <div class="text-xl font-heading tracking-widest leading-none bg-[--aw-color-grey9] px-5 py-[10px] flex flex-row align-center max-w-[400px] max-h-11 mt-[-12px] mb-4"> <a href="https://dmkpress.com/catalog/business/978-5-93700-435-2/">Оформить предзаказ</a> </div> </div>
+            
+            <h2 class="text-xl sm:text-3xl leading-tight my-2 dark:text-slate-300 font-heading z-[2]"> Я хочу сделать хороший дизайн продукта </h2>
+            <h3 class="text-xl font-bold mb-6"> Для профессионалов, задействованных в дизайн-проектах, вне зависимости от роли в проекте и уровня навыков дизайнера. </h3> </header>
+            <div class="format-subtitle-markdown"> 
+              <p>Рассказываем в формате справочника-путеводителя, как управленцу или аналитику подготовить, организовать и удачно реализовать проект по дизайну продукта.</p>
+            </div>
+            <div class="format-subtitle-markdown"> <p>«Блестящее сочетание очевидных (и потому попадающих в слепое пятно) и нетривиальных (спасибо разнообразию и богатству опыта автора) советов и рекомендаций в области продуктового дизайна как для людей, в нем искушенных, так и для новичков. Причем для новичков книга не просто справочник — это и великолепный самоучитель, эффективно заменяющий дорогие курсы. Вдобавок она написана легким и живым языком, и оттого читать ее — отдельное удовольствие, незаметно способствующее усвоению материала».</p>
+            </div>
+            <div class="flex flex-row justify-end">
+              <p class="text-base mt-[-16px] mb-6  md:max-w-[60%]">
+              Андрей Себрант, директор по стратегическому маркетингу Яндекса, канд. физ.-мат. наук, профессор Университета ИТМО, эксперт Клуба Forbes</p>
+            </div>
+          </div>
+        </div>
+      </article>
+  </div>
+</Layout>

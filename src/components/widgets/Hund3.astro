@@ -50,7 +50,7 @@ const {
         }
         <div class:list={[twMerge('max-w-3xl', classes.subtitleContainer || '')]}>
           {subtitle && (
-            <p class:list={[twMerge('text-xl text-muted mb-6 dark:text-slate-300', classes.subtitle || '')]} set:html={subtitle} />
+            <div class:list={[twMerge('text-xl text-muted mb-6 dark:text-slate-300', classes.subtitle || '')]} set:html={subtitle} />
           )}         
         </div>
         {content && <Fragment set:html={content} />}
