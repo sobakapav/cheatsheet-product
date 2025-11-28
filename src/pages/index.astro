@@ -3,6 +3,9 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 
 import Layout from '~/layouts/PageLayout.astro';
 import Hund3 from '~/components/widgets/Hund3.astro';
+import Hund2 from '~/components/widgets/Hund2.astro';
+import Hund from '~/components/widgets/Hund.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import { getCollection } from 'astro:content';
 
 import Bread from '~/components/widgets/Bread.astro';
@@ -52,30 +55,36 @@ for (var cheatsheet of cheatsheets) {
 <Layout metadata={metadata}>
   <Bread title="Шпаргалки" />
     
-  <Hund3
+  <Hero2
     classes={{
       main: 'pb-10 md:pb-10',
       subtitle: 'mb-0',
     }}
+    image={{
+      src: '~/assets/images/book.jpg',
+      alt: "Я хочу сделать хороший дизайн продукта",
+    }}
+    imageName="Я хочу сделать хороший дизайн продукта"
+    sections={sections}
   >
+    
     <Fragment slot="title">
-      Шпаргалки по дизайну интерфейсов
+      Шпаргалки<br/>по дизайну интерфейсов
     </Fragment>
 
     <Fragment slot="subtitle">
-      <div class="mb-6">
-        {sections.map(section => (
-          <a class="text-3xl font-heading mb-10 hover:text-[--aw-color-accent]" href={`#${section.id}`}>{section.title}</a><span class="text-3xl text-[--aw-color-hund]"> • </span>
-        ))}      
-      </div>
+      
       <p class="text-xl mb-2 text-[--aw-color-text-muted]">Реальный проект по дизайну интерфейсов — это огромное количество вопросов, которые возникают на всех этапах. Какие-то в очень четких формулировках, какие-то витают в воздухе.</p>
       <p class="text-xl text-[--aw-color-text-muted]">Мы взяли на себя смелость зафиксировать самые насущные темы и выдать достаточно четкие (но не поверхностные) инструкции, как действовать в том или ином случае. </p>
       
     </Fragment>
-  </Hund3>
+    
+    <Fragment slot="image">"/images/book.jpg"</Fragment>
+  </Hero2>
       
-  <section class="px-6 sm:px-6 pb-12 sm:pb-16 lg:pb-20 mx-auto max-w-7xl">
-    <ul class="columns-2">
+  <section class="px-6 sm:px-6 pb-12 sm:pb-16 lg:pb-20 mx-auto max-w-7xl mt-20">
+    
+    <ul class="lg:columns-2">
       {sections.map(section => (
         <li class="break-inside-avoid-column mb-16">
           <a class="anchor" id={section.id} />
