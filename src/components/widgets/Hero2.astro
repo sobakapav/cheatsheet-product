@@ -37,7 +37,7 @@ const {
         {supertitle && <div set:html={supertitle} />}
         {
           title && (
-            <h1 class="text-5xl md:text-[100px] leading-none mb-6 font-heading dark:text-gray-200" set:html={title} />
+            <h1 class="text-5xl md:text-8xl leading-none mb-6 font-heading dark:text-gray-200" set:html={title} />
           )
         }
         <div class="max-w-3xl lg:max-w-none flex flex-col">
@@ -60,7 +60,7 @@ const {
         </div>
         {content && <Fragment set:html={content} />}
       </div>
-      <div class="basis-1/3 flex flex-col items-start lg:items-end mt-4">
+      <div class="basis-1/3 flex flex-col items-start lg:items-end mt-[14px]">
         {
           image && (
             <div class="relative m-auto max-w-5xl">
