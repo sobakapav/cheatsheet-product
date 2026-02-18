@@ -9,12 +9,22 @@ import { getCanonical, getPermalink } from '~/utils/permalinks';
 
 export async function getStaticPaths() {
   const cheatsheets = await getCollection('cheatsheets');
-  return cheatsheets.map(entry => ({
+  const cheatsheetsEntries = cheatsheets.map(entry => ({
     params: { slug: entry.id.substring(4) }, props: { entry },
-  }));
+  })); 
+  const portfolio = await getCollection('portfolio');
+  const portfolioEntries = portfolio.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  })); 
+
+  return [...cheatsheetsEntries, ...portfolioEntries];
 }
 
 const { entry } = Astro.props;
+
+if (entry.collection === 'portfolio') {
+  return Astro.redirect(entry.data.link);
+}
 
 const nextEntries = [];
 const cheatsheets = await getCollection('cheatsheets');
